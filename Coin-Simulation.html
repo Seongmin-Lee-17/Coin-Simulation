@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>동전 던지기 시뮬레이션</title>
 <style>
     body {
@@ -42,8 +42,15 @@
 <h1>🪙 동전 던지기 시뮬레이션</h1>
 
 <div class="slider-box">
-    <label>동전 개수: <span id="coinCountDisplay">3</span></label><br>
-    <input type="range" id="numCoins" min="1" max="20" value="3" oninput="updateCoinCount()">
+    <label>동전 개수: <span id="coinCountDisplay">3</span></label><br />
+    <input
+        type="range"
+        id="numCoins"
+        min="1"
+        max="50"
+        value="3"
+        oninput="updateCoinCount()"
+    />
 </div>
 
 <button onclick="startSimulation()">▶ 시뮬레이션 시작</button>
@@ -54,7 +61,8 @@
 
 <script>
     function updateCoinCount() {
-        document.getElementById("coinCountDisplay").textContent = document.getElementById("numCoins").value;
+        document.getElementById("coinCountDisplay").textContent =
+            document.getElementById("numCoins").value;
     }
 
     function startSimulation() {
