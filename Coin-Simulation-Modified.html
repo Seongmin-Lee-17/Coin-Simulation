@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>동전 던지기 시뮬레이션</title>
+<style>
+    body {
+        font-family: "Noto Sans KR", sans-serif;
+        text-align: center;
+        background: #f0f0f0;
+        padding: 20px;
+    }
+    .slider-box {
+        margin: 15px 0;
+    }
+    .coin {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 50%;
+        background: gold;
+        font-size: 22px;
+        margin: 5px;
+        animation: flip 1s ease forwards;
+    }
+    @keyframes flip {
+        0% { transform: rotateY(0deg); }
+        50% { transform: rotateY(180deg); }
+        100% { transform: rotateY(360deg); }
+    }
+    #result {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<h1>🪙 동전 던지기 시뮬레이션</h1>
+
+<div class="slider-box">
+    <label>동전 개수: <span id="coinCountDisplay">3</span></label><br />
+    <input
+        type="range"
+        id="numCoins"
+        min="1"
+        max="50"
+        value="3"
+        oninput="updateCoinCount()"
+    />
+</div>
+
+<button onclick="startSimulation()">▶ 시뮬레이션 시작</button>
+
+<div id="coinArea" style="margin: 20px;"></div>
+
+<div id="result"></div>
+
+<script>
+    function updateCoinCount() {
+        document.getElementById("coinCountDisplay").textContent =
+            document.getElementById("numCoins").value;
+    }
+
+    function startSimulation() {
+        const numCoins = parseInt(document.getElementById("numCoins").value);
+        const coinArea = document.getElementById("coinArea");
+        const resultArea = document.getElementById("result");
+
+        coinArea.innerHTML = "";
+        resultArea.textContent = "";
+
+        let heads = 0;
+        let tails = 0;
+
+        // 동전 생성 및 결과 표시
+        for (let i = 0; i < numCoins; i++) {
+            const coin = document.createElement("div");
+            coin.classList.add("coin");
+            const isHead = Math.random() < 0.5;
+            if (isHead) {
+                coin.textContent = "앞";
+                heads++;
+            } else {
+                coin.textContent = "뒤";
+                tails++;
+            }
+            coinArea.appendChild(coin);
+        }
+
+        // 결과 출력
+        resultArea.textContent = `앞면: ${heads}개, 뒷면: ${tails}개`;
+    }
+</script>
+
+</body>
+</html>
